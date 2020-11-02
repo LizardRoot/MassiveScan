@@ -21,5 +21,3 @@ Nmap - 1066,39 sec.
 MassiveScan - 98,12 sec.
 
 <hr>
-Instruction:
-https://youtu.be/cUkvrfv5QwY
