@@ -4,15 +4,6 @@ import time
 import socket
 import threading
 
-
-def error_info(): # информативная функция , если маска сети равна 32,31,4-9
-    print('Error.')
-    print('Netmask 32, 31 - does not have working hosts.')
-    print('Netmask 9      - has working hosts 8,388,606.')
-    print('Netmask 0      - has working hosts 4,294,967,294...')
-    print('')
-
-
 # чистка данных с ранее использованными ip 
 
 drk_1 = os.path.abspath(os.curdir)
@@ -106,9 +97,6 @@ except ValueError:
 
 file = open('output_ips.txt', 'r')
 for ip in file:
-    print('working with ' + ip)
-
-    #print('')
     res1_new = []
     res1 = ip.split('/')
     for i in res1:
@@ -453,9 +441,10 @@ def timeout_try_1(ip,port,timeout):
   except socket.timeout:
     t2 = threading.Thread(target = timeout_try_2, args = (ip.rstrip('\r\n'), port, float('0.1')))
     t2.start()
-    t2.join(0.1)
+    #t2.join(0.1)
 
   except Exception as e:
+    #print(ip.rstrip('\r\n') + ' ' + port + ' error')
     pass
 
 
@@ -470,9 +459,11 @@ def timeout_try_2(ip, port, timeout):
     connect.close()
 
   except socket.timeout:
+    #print(ip.rstrip('\r\n') + ' ' + port + ' dead')
     pass
 
   except Exception as e:
+    #print(ip.rstrip('\r\n') + ' ' + port + ' error')
     pass
 
 start_time = time.time()
